@@ -1,7 +1,7 @@
 // import React from 'react'
 // const React = require('react')
 
-const App = [1,2].includes(1)
+const App = [1, 2].includes(1)
 
 // const foo = {...{a:1,b:2}}
 
@@ -10,6 +10,11 @@ const App = [1,2].includes(1)
 //     return <div>App66666</div>
 //   }
 // }
+import(/* webpackChunkName: "lodash", webpackPreload: true */ 'lodash').then(
+  _ => {
+    console.log(_.join(['Another', 'module', 'loaded!'], ' '))
+  }
+)
 
 export default App
 

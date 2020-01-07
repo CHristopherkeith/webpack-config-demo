@@ -12,7 +12,8 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(appDirectory, 'build'),
-    filename: '[name].[contenthash:8].bundle.js'
+    filename: '[name].[contenthash:8].bundle.js',
+    chunkFilename: '[name].[contenthash:8].chunk.js'
   },
   mode: 'production',
   devtool: 'source-map',
@@ -25,9 +26,10 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: [
-              ['@babel/preset-env'/* , { useBuiltIns: 'entry' } */],
+              ['@babel/preset-env' /* , { useBuiltIns: 'entry' } */],
               '@babel/preset-react'
-            ]
+            ],
+            // plugins: ['@babel/plugin-syntax-dynamic-import']
           }
         }
       }
@@ -37,7 +39,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'public/index.html'
     }),
-    new CleanWebpackPlugin(),
-    new BundleAnalyzerPlugin()
+    new CleanWebpackPlugin()
+    // new BundleAnalyzerPlugin()
   ]
 }
