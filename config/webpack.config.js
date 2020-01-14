@@ -9,14 +9,14 @@ const fs = require('fs')
 
 const appDirectory = fs.realpathSync(process.cwd())
 module.exports = {
-  entry: './src/index.js',
+  entry: [/* '@babel/polyfill', */ /* './polyfill.js', */ './src/index.js'],
   output: {
     path: path.resolve(appDirectory, 'build'),
     filename: '[name].[contenthash:8].bundle.js',
     chunkFilename: '[name].[contenthash:8].chunk.js'
   },
   mode: 'production',
-  devtool: 'source-map',
+  // devtool: 'source-map',
   module: {
     rules: [
       {
@@ -26,9 +26,10 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: [
-              ['@babel/preset-env' /* , { useBuiltIns: 'entry' } */],
-              '@babel/preset-react'
-            ],
+              // ['@babel/preset-env', { useBuiltIns: 'entry' }],
+              ['@babel/preset-env', { useBuiltIns: 'usage' }],
+              ['@babel/preset-react']
+            ]
             // plugins: ['@babel/plugin-syntax-dynamic-import']
           }
         }
@@ -39,7 +40,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'public/index.html'
     }),
-    new CleanWebpackPlugin()
-    // new BundleAnalyzerPlugin()
+    new CleanWebpackPlugin(),
+    new BundleAnalyzerPlugin()
   ]
 }

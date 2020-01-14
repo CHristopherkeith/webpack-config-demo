@@ -6,5 +6,6 @@ import App from './App'
 //   <App/>,
 //   document.getElementById('app')
 // );
+debugger
 
 console.log(App)
